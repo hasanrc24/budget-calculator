@@ -3,14 +3,14 @@ import '../css/expense-item.css'
 
 const ExpenseItem = ({expenses}) => {
 
-  const {id, expense, cost} = expenses;
+  const {id, charge, amount} = expenses;
   return (
     <ul className='cl list-group-item'>
-      <li>{expense}</li>
-      <li>{cost}</li>
+      <li>{charge}</li>
+      <li>{amount}</li>
       <li>
-        <button>Edit</button>
-        <button>X</button>
+        <button className='btn btn-primary'>Edit</button>
+        <button className='btn btn-primary'>X</button>
       </li>
     </ul>
   )
