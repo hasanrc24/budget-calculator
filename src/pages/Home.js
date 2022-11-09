@@ -5,29 +5,13 @@ import Form from '../componenets/Form';
 import { v4 as uuidv4, v4 } from 'uuid';
 import '../css/home.css'
 
-// const initialExpenses = [
-//     {
-//         id: uuidv4(),
-//         expense: "Rent",
-//         cost: 1000
-//     },
-//     {
-//         id: uuidv4(),
-//         expense: "Bike servicing",
-//         cost: 500
-//     },
-//     {
-//         id: uuidv4(),
-//         expense: "Cloths",
-//         cost: 400
-//     }
-// ]
 
 const Home = () => {
 
     const [expense, setExpenses] = useState([]);
     const [charge, setCharge] = useState('');
     const [amount, setAmount] = useState('');
+    const [alert, setAlert] = useState({status: false});
 
     const handleSubmit = (e) =>{
         e.preventDefault();
@@ -36,13 +20,24 @@ const Home = () => {
             setExpenses([...expense, singleExpense]);
             setCharge('');
             setAmount('');
+            setAlert({msg: "Added successfully"})
+            setTimeout(() =>{
+                setAlert({status: false})
+            }, 3000)
+        }
+        else{
+            setAlert({status: true, msg: "Please fillout the form properly"})
+            setTimeout(() => {
+                setAlert({status: false})
+            }, 3000)
         }
     }
     console.log(charge)
   return (
     <div className='size'>
         <h2>Budget Calculator</h2>
-        <Alert />
+        {alert && <Alert alert={alert} />}
+        {/* <Alert /> */}
         <div className='middle'>
             <Form handleSubmit={handleSubmit} charge={charge} setCharge={setCharge} amount={amount} setAmount={setAmount} />
             <ExpenseList expenses={expense}  />
